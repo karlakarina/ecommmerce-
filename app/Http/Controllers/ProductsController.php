@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests;
+
+use App\Product;
+use Illuminate\Support\Facades\Auth;
+
 class ProductsController extends Controller
 {
     /**
@@ -13,7 +18,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products =Product::all();
+        return view("products.index",["products"=> 
+            $products]);
+
+        //se encarga de mostrar toda la coleccion de recursos todos lo productos grupo o coleccion
     }
 
     /**
@@ -23,7 +32,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
+        //despliega la vista con el formulario para crear un nuevo producto
     }
 
     /**
@@ -34,7 +44,22 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product=new Product;
+
+        $product->title=$request->title;
+        $product->description=$request->description;
+        $product->pricing=$request->pricing;
+        $product->user_id=Auth::user()->id;
+
+        if ($product->save())
+        {
+            return redirect("/products");
+        }else{
+            return view ("products.create");
+        }
+
+
+        //formulario que se muetra en create se envia a store y store guardar el nuevo producto
     }
 
     /**
@@ -45,7 +70,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        //muestra el producto con este id 
     }
 
     /**

@@ -2,6 +2,7 @@
 
 
 Route::get('/', 'MainController@home'); 
+Route::resource('products','ProductsController');
 
 Route::get("logout","MainController@cerrar");
 Auth::routes();
