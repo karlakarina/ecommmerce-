@@ -21,4 +21,3 @@
     	<input type="submit" value="Enviar" class="btn btn-success">
     </div>
     {!! Form::close()}
-

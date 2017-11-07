@@ -3,3 +3,29 @@
 // Variables
 @import "variables";
 
+.navbar{
+	margin-botto:0px;
+}
+.big-padding{
+	padding:30px;
+}
+.blue_grey{
+	background-color:#37474f;
+}
+.white{
+	background-colorwhite;
+}
+
+.white-text{
+	color:white;
+}
+.table{
+	background-color:white;
+}
+
+.floating{
+	position:fixed;
+	bottom:2em;
+	right:2em;
+	z-index:100;
+}

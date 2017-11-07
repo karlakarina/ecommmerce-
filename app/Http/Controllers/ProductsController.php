@@ -34,6 +34,7 @@ class ProductsController extends Controller
     {
         return view('products.create');
         //despliega la vista con el formulario para crear un nuevo producto
+
     }
 
     /**
@@ -51,7 +52,8 @@ class ProductsController extends Controller
         $product->pricing=$request->pricing;
         $product->user_id=Auth::user()->id;
 
-        if ($product->save())
+        if ($product->
+            save())
         {
             return redirect("/products");
         }else{
