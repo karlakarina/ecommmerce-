@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ProductsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a slisting of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,10 +32,12 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $product=new Product;
+        return view("products.create",["product"=>$product]);
         //despliega la vista con el formulario para crear un nuevo producto
 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +59,7 @@ class ProductsController extends Controller
         {
             return redirect("/products");
         }else{
-            return view ("products.create");
+            return view ("products.create",["product"=>$product]);
         }
 
 
@@ -72,6 +74,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+        $product =Product::find($id);
+        return view('products.show',['product'=>$product]);
         //muestra el producto con este id 
     }
 
@@ -83,7 +87,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product=Product::find($id);
+        return view("products.edit",["product"=>$product]);
     }
 
     /**
@@ -95,7 +100,22 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           $product=Product::find($id);
+
+        $product->title=$request->title;
+        $product->description=$request->description;
+        $product->pricing=$request->pricing;
+        
+
+
+        if ($product->save())
+        {
+            return redirect("/products");
+        }else{
+            return view ("products.edit",["product"=>$product]);
+        }
+
+
     }
 
     /**
@@ -106,6 +126,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+        Product::destroy($id);
+        return redirect('/products');
         //
     }
 }
